@@ -21,3 +21,39 @@ With the data downloaded and unzipped, we should probably make sure we have post
   2. use the `copy` command to copy the data from the csv with delimeter information.
 
 In this particular case we want to get the data from all the CSVs we downloaded from the USDA. These include: food.csv, food_attribute.csv, food_nutrient.csv, food_update_log_entry.csv. So what are these files about and what are they used for? Luckily the USDA has a fantastic explanation included with their files. If you check out the file "Download & API Field Descriptions October 2022.pdf" you can see what their respective fields are and get an idea of how the data is linked together.
+
+### Write Some SQL
+
+We need to get our data out of the CSV we downloaded and in to the database we just installed. The easiest way is going to be writing up a `.sql` file that will allow us to run it in `psql`.
+
+Because we may run this more than once, our first step is to drop the schema we are about to create from the table. In a sense this means we can guarantee that the table we indend to populate _will not exist_ when we go to create it or modify it.
+
+```
+drop schema if exists usda cascade;
+```
+
+We then need to create the new schema and our first table within in it.
+
+```
+create schema usda;
+
+create table usda.food(
+  fdc_id text,
+  data_type text,
+  description text,
+  food_category_id text,
+  publication_date text
+);
+```
+
+What this does is creates some columns that we will fill with our data from the CSV. This dataset actually comes with a metadata file that will tell you all the column  names and their associated data types. For now we will keep them all as text in order to make sure that we can easily ingest the data to the new database. 
+
+This is actually where you may want to diverge from these instructions and actually make them their specific data type if it could have benefits to how you use your data in the future.
+
+The next step is to import the data for this table from the CSV we downloaded.
+```
+copy usda.food
+from '/home/chris/Documents/USDA Food Datas/food.csv' 
+with (FORMAT csv, DELIMITER ',');
+```
+
