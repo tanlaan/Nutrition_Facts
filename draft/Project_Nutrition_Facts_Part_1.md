@@ -123,3 +123,20 @@ copy usda.branded_food
 from '/home/chris/Documents/USDA Food Datas/branded_food.csv'
 with (FORMAT csv, DELIMITER ',');
 ```
+
+### Run Said SQL
+
+I had created a user during my postgres installation that matched my username.
+
+This command will:
+
+`psql` run a psql command `-U` Run as user `chris` `-d` Run against the `usda` database `-a` output all information `-f` use this full and specific file path.
+
+```
+psql -U chris -d usda -a -f '/home/chris/Documents/USDA Food Datas/usda/import.sql'
+```
+
+This command may take a decent bit to process through that 2gb `.csv` file depending on your computer.
+
+Once completed we should now have the database ready for use by a rails app! We just need to make one first.
+
