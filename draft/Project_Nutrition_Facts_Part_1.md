@@ -140,3 +140,32 @@ This command may take a decent bit to process through that 2gb `.csv` file depen
 
 Once completed we should now have the database ready for use by a rails app! We just need to make one first.
 
+### Make a Rails App
+
+Have `rails` create a `new` rails app called `usda` 
+
+```
+rails new usda
+```
+
+We now have the skeleton of a rails app created for us. The next step is to hook up the tables we just made to rails. Rails expects a specific kind of table formatting as a default, this is having the [singularized_table_name_id]("https://www.bigbinary.com/books/learn-rubyonrails-book/summarizing-rails-naming-conventions#naming-conventions-for-databases"). The problem is that our tables from the CSV file do not follow this pattern. So we must specify where to look for via `self.table_name` and `self.primary_key`.
+
+```
+# src/app/models/branded_food.rb
+class BrandedFood < ApplicationRecord
+  self.table_name = 'branded_food'
+  self.primary_key = 'fdc_id'
+end
+```
+
+We had a reference included with the dataset that should make it very easy to identify which column is the table id. Do this for all the other tables.
+
+```
+# src/app/models/food_attribute.rb -- ditto
+# src/app/models/food_nutrient.rb  -- ditto
+# src/app/models/food.rb  -- ditto
+```
+
+### Making an API
+
+We will need both a route to a controller as well as the controller itself to handle gathering the needed data for a request.
