@@ -169,3 +169,32 @@ We had a reference included with the dataset that should make it very easy to id
 ### Making an API
 
 We will need both a route to a controller as well as the controller itself to handle gathering the needed data for a request.
+
+The branded_food table has the relation between a food and it's associated UPC code. We will represent a request to `/upc/:id` will forward to a controller for `branded_food`'s `#show`.
+```
+# routes.config
+Rails.application.routes.draw do
+  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
+
+  # Defines the root path route ("/")
+  # root "articles#index"
+  get '/upc/:id', to: 'branded_food#show'
+end
+```
+
+We now need a controller that actually creates the function `show`.
+
+We do this by creating a class variable `@food` that is a query against whether or not the text sent is similar to a column by being present somehwere within the string exactly. If we get back zero rows then we know it doesn't exist and we instead send a JSON object with the key of `error`. Returning JSON allows other javascript application to potentially call for this value and get back the columnar values only in `branded_food`.
+
+```
+class BrandedFoodController < ApplicationController
+  def show
+    @food = BrandedFood.where('gtin_upc like ?', "%#{params[:id]}%")
+    if @food.empty?
+      render json: { error: 'Item not found in database.' }
+    else
+      render json: @food
+    end
+  end
+end
+```
