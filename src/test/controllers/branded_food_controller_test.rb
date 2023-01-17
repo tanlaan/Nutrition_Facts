@@ -1,7 +1,15 @@
-require "test_helper"
+# frozen_string_literal: true
 
+require 'test_helper'
+
+# Tests for the Branded Food Controller
 class BrandedFoodControllerTest < ActionDispatch::IntegrationTest
-  test "should return error when given more than 13 characters" do
+  # We probably don't care to differentiate if it's just:
+  # - Unique sub-sequence
+  # - GTIN that wasn't found
+  # - It's over length
+  # This test should cover those cases
+  test 'should return error when given more than 13 characters' do
     get '/upc/12345678901234'
     assert_response :success
     json_response = JSON.parse(response.body)
@@ -11,10 +19,10 @@ class BrandedFoodControllerTest < ActionDispatch::IntegrationTest
     # expect(JSON['error']).to eq("Item not found in database.")
     # assert true
   end
-  test "should return successfully and with more than 1 object" do
+  test 'should return successfully and with more than 1 object' do
     print 'Add test data before this actually works.'
     assert false
-    
+
     # We need to actually add an item to the test database otherwise
     # it we can't test a matching barcode -- derp
     #
