@@ -198,3 +198,26 @@ class BrandedFoodController < ApplicationController
   end
 end
 ```
+
+### Start your servers!
+
+We should now functionally have a database full of data, a rails model for the table itself, a controller to get the data and hand it back, and a route to get to said controller. This means we just have to start the server.
+```
+❯ rails s
+=> Booting Puma
+=> Rails 7.0.4 application starting in development 
+=> Run `bin/rails server --help` for more startup options
+Puma starting in single mode...
+* Puma version: 5.6.5 (ruby 2.7.2-p137) ("Birdie's Version")
+*  Min threads: 5
+*  Max threads: 5
+*  Environment: development
+*          PID: 44268
+* Listening on http://127.0.0.1:3000
+* Listening on http://[::1]:3000
+Use Ctrl-C to stop
+```
+
+Following the link provided [http://127.0.0.1:3000](http://127.0.0.1:3000/) will get you to a Rails successful install index. Once there we know we are up and running and it's time to try and query a upc code from our very own API! Try going to [http://127.0.0.1:3000/upc/879890001431](http://127.0.0.1:3000/upc/879890001431).
+
+If you get back a successful JSON response, YOU DID IT!
