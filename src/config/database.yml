@@ -6,6 +6,9 @@
 #
 default: &default
   adapter: postgresql
+  host: db
+  username: postgres
+  password: password
   pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
   timeout: 5000
   schema_search_path: 'usda, public, usda_test'
