@@ -8,7 +8,7 @@ The intent for this project is to show the thought process and actions for the s
 
 [Part 1](./draft/Project_Nutrition_Facts_Part_1.md)
 
-Part 2
+[Part 2](./draft/Project_Nutrition_Facts_Part_2.md)
 
 Part 3
 
