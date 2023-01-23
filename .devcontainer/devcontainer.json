@@ -2,5 +2,6 @@
   "dockerComposeFile": "../docker-compose.yml",
   "service": "web",
   "workspaceFolder": "/myapp",
-  "forwardPorts": [3000]
+  "forwardPorts": [3000],
+  "shutdownAction": "stopCompose"
 }
