@@ -42,3 +42,10 @@
   - Article on using it: https://twinsunsolutions.com/blog/building-a-ruby-on-rails-app-with-a-legacy-database/
   - Accessing postgres schema produced in CSV->Postgres section. It’s considered a namespace and doesn’t show up in psql when you run the \dt (list tables) command. https://dba.stackexchange.com/questions/183748/postgres-permissions-schema-not-showing-using-dt
     - That’s the postgres side of things, you can do the same for the Ruby side alone if all you want to know/do is to interface with your ruby app. https://dba.stackexchange.com/questions/191745/set-search-path-for-postgres-in-a-rails-app
+
+### Dockerizing
+
+- Developing in a container (via VS Code): https://code.visualstudio.com/docs/devcontainers/create-dev-container
+- Creating a dev container: https://code.visualstudio.com/docs/devcontainers/containers
+- News on Rails 7.1 getting an official docker container: https://fly.io/ruby-dispatch/rails-on-docker/
+  - Hacker News for the article: https://news.ycombinator.com/item?id=34533930
